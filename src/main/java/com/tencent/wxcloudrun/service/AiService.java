@@ -15,12 +15,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 智谱大模型客户端：GLM-4V 视觉识别 + GLM-4 文本生成。
+ * DeepSeek 大模型客户端：deepseek-flash 视觉识别 + 文本生成。
  */
 @Service
 public class AiService {
 
-  private static final String ZHIPU_URL = "https://open.bigmodel.cn/api/paas/v4/chat/completions";
+  private static final String DEEPSEEK_URL = "https://api.deepseek.com/chat/completions";
 
   private static final String NUTRITION_SYSTEM_PROMPT =
       "你是营养分析助手。根据食物图片估算其营养数据。只返回 JSON，不要任何其他文字、解释或 markdown。格式严格如下："
@@ -31,13 +31,13 @@ public class AiService {
   private static final String ADVICE_SYSTEM_PROMPT =
       "你是私人营养顾问。根据用户的身体档案、每日目标和近期饮食记录，给出简洁、具体、可执行的中文饮食建议（100-200 字）。只输出建议正文。";
 
-  @Value("${zhipu.api-key:}")
+  @Value("${deepseek.api-key:}")
   private String apiKey;
 
-  @Value("${zhipu.vision-model:glm-4v-plus}")
+  @Value("${deepseek.vision-model:deepseek-flash}")
   private String visionModel;
 
-  @Value("${zhipu.text-model:glm-4-flash}")
+  @Value("${deepseek.text-model:deepseek-flash}")
   private String textModel;
 
   private final RestTemplate restTemplate = new RestTemplate();
@@ -106,7 +106,7 @@ public class AiService {
     headers.setBearerAuth(apiKey);
 
     HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
-    String resp = restTemplate.postForObject(ZHIPU_URL, entity, String.class);
+    String resp = restTemplate.postForObject(DEEPSEEK_URL, entity, String.class);
     return extractContent(resp);
   }
 

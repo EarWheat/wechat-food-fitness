@@ -21,7 +21,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
-zhipu:
-  api-key: ${ZHIPU_API_KEY:}
-  vision-model: ${ZHIPU_VISION_MODEL:glm-4v-plus}
-  text-model: ${ZHIPU_TEXT_MODEL:glm-4-flash}
+deepseek:
+  api-key: ${DEEPSEEK_API_KEY:}
+  vision-model: ${DEEPSEEK_VISION_MODEL:deepseek-flash}
+  text-model: ${DEEPSEEK_TEXT_MODEL:deepseek-flash}
